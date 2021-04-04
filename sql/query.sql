@@ -1,5 +1,5 @@
 /*
-SQLyog Community v13.1.6 (64 bit)
+SQLyog Enterprise v13.1.1 (64 bit)
 MySQL - 8.0.23 : Database - ces
 *********************************************************************
 */
@@ -101,6 +101,33 @@ CREATE TABLE `form` (
 
 insert  into `form`(`id`,`std_id`,`session`,`sem_id`,`type`) values 
 (1,1,2020,1,1);
+
+/*Table structure for table `mark_ladger` */
+
+DROP TABLE IF EXISTS `mark_ladger`;
+
+CREATE TABLE `mark_ladger` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `std_id` int DEFAULT NULL,
+  `sub_id` int DEFAULT NULL,
+  `t_id` int DEFAULT NULL,
+  `f_id` int DEFAULT NULL,
+  `mark` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `std_id` (`std_id`),
+  KEY `sub_id` (`sub_id`),
+  KEY `t_id` (`t_id`),
+  KEY `f_id` (`f_id`),
+  CONSTRAINT `mark_ladger_ibfk_1` FOREIGN KEY (`std_id`) REFERENCES `student` (`id`),
+  CONSTRAINT `mark_ladger_ibfk_2` FOREIGN KEY (`sub_id`) REFERENCES `subjects` (`id`),
+  CONSTRAINT `mark_ladger_ibfk_3` FOREIGN KEY (`t_id`) REFERENCES `teacher` (`id`),
+  CONSTRAINT `mark_ladger_ibfk_4` FOREIGN KEY (`f_id`) REFERENCES `form` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `mark_ladger` */
+
+insert  into `mark_ladger`(`id`,`std_id`,`sub_id`,`t_id`,`f_id`,`mark`) values 
+(1,1,1,1,1,100);
 
 /*Table structure for table `program` */
 
