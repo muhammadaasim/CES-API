@@ -10,9 +10,18 @@ app.use(cors());
 var dept = require('./routes/dept')
 app.use('/dept', dept)
 
+var prog = require('./routes/program')
+app.use('/prog', prog);
+
+var semester = require('./routes/semester')
+app.use('/semester', semester);
 
 var student = require('./routes/student')
 app.use('/student', student);
+
+var subject = require('./routes/subject')
+app.use('/subject', subject);
+
 
 var config = require('./routes/config')
 app.use('/config', config);

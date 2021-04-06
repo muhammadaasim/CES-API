@@ -29,7 +29,7 @@ module.exports.updateConfig = (req, res) => {
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
-          res.send({ error: null, message: "Insert successfully", data: rows });
+          res.send({ error: null, message: "Insert successfully", result: rows });
           connection.release((er) => console.log(er));
         }
       );

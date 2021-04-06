@@ -22,7 +22,7 @@ module.exports.getDepartmentById = (req, res) => {
 			connection.query('SELECT * FROM dept WHERE id= ?', [ req.params.id ], function(err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
-				res.send({ data: rows });
+				res.send({ result: rows });
 				connection.release((er) => console.log(er));
 			});
 		});
@@ -43,7 +43,7 @@ module.exports.insertDepartment = (req, res) => {
 			connection.query(`INSERT INTO dept SET ?`, { name: req.body.name }, function(err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
-				res.send({ error: null, message: 'Insert successfully', data: rows });
+				res.send({ error: null, message: 'Insert successfully', result: rows });
 				connection.release((er) => console.log(er));
 			});
 		});
