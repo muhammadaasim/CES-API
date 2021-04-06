@@ -62,13 +62,21 @@ module.exports.insertStudent = (req, res) => {
             gender: req.body.gender,
             nationality: req.body.nationality,
             username: req.body.username,
-            password: req.body.password
-          }
+            password: req.body.password,
+            district: req.body.district,
+            address: req.body.address,
+            fathername: req.body.fathername,
+            insertiondate: new Date().getTime()
+          },
         ],
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
-          res.send({ error: null, message: "Insert successfully", result: rows });
+          res.send({
+            error: null,
+            message: "Insert successfully",
+            result: rows,
+          });
           connection.release((er) => console.log(er));
         }
       );
@@ -99,14 +107,18 @@ module.exports.updateStudent = (req, res) => {
             gender: req.body.gender,
             nationality: req.body.nationality,
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
           },
-            req.params.id
+          req.params.id,
         ],
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
-          res.send({ error: null, message: "Updated Successful", result: rows });
+          res.send({
+            error: null,
+            message: "Updated Successful",
+            result: rows,
+          });
           connection.release((er) => console.log(er));
         }
       );
