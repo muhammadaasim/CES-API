@@ -23,6 +23,12 @@ var subject = require('./routes/subject')
 app.use('/subject', subject);
 
 
+var teacher = require('./routes/teacher')
+app.use('/teacher', teacher);
+
+var incharge = require('./routes/incharge')
+app.use('/incharge', incharge);
+
 var config = require('./routes/config')
 app.use('/config', config);
 

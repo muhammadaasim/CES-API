@@ -14,7 +14,7 @@ module.exports.getStudent = (req, res) => {
   } catch (e) {
     res.send({
       error: "Error getting student",
-      student: [],
+      result: [],
       success: "Failed",
     });
   }
@@ -39,7 +39,7 @@ module.exports.getStudentById = (req, res) => {
   } catch (e) {
     res.send({
       error: "Error getting student",
-      student: [],
+      result: [],
       success: "Failed",
     });
   }
@@ -84,7 +84,7 @@ module.exports.insertStudent = (req, res) => {
   } catch (e) {
     res.send({
       error: "Error getting student",
-      student: [],
+      result: [],
       success: "Failed",
     });
   }
@@ -126,7 +126,48 @@ module.exports.updateStudent = (req, res) => {
   } catch (e) {
     res.send({
       error: "Error getting student",
-      student: [],
+      result: [],
+      success: "Failed",
+    });
+  }
+};
+module.exports.loginStudent = (req, res) => {
+  try {
+    connection.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        `SELECT id FROM student WHERE username = ? AND password = ?`,
+        [ req.body.username,req.body.password  ],
+        function (err, rows, fields) {
+          if (err) throw err;
+          console.log(rows);
+          if(rows){
+           
+              res.send({
+                error: null,
+                result: rows,
+              });          
+              connection.release((er) => console.log(er));
+            
+            
+          }
+          else{
+            res.send({
+              error: null,
+              message: "Login Failed",
+              result: '',
+            });          
+            connection.release((er) => console.log(er));
+          }
+         
+         
+        }
+      );
+    });
+  } catch (e) {
+    res.send({
+      error: "Error getting student login details",
+      result: [],
       success: "Failed",
     });
   }
