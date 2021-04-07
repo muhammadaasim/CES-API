@@ -4,7 +4,7 @@ module.exports.getStudent = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       console.log("MySQL Connection Established: ", connection.threadId);
-      connection.query("SELECT * FROM student", function (err, rows, fields) {
+      connection.query("SELECT * FROM GetStudent ", function (err, rows, fields) {
         if (err) throw err;
         console.log(rows);
         res.send({ error: "", success: "success", result: rows });
@@ -24,7 +24,7 @@ module.exports.getStudentById = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM student WHERE id= ?",
+        "SELECT * FROM GetStudent WHERE student_id= ?",
         [req.params.id],
         function (err, rows, fields) {
           if (err) {

@@ -29,6 +29,10 @@ app.use('/teacher', teacher);
 var incharge = require('./routes/incharge')
 app.use('/incharge', incharge);
 
+var teacherassign = require('./routes/teacherAssign')
+app.use('/teacherassign', teacherassign);
+
+
 var config = require('./routes/config')
 app.use('/config', config);
 
