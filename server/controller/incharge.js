@@ -75,7 +75,7 @@ module.exports.insertIncharge = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `insert into Incharge  SET ?  `,
+        `insert into deptincharge  SET ?  `,
         [
           {
             fullname: req.body.fullname,
