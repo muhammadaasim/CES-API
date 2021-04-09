@@ -31,6 +31,24 @@ module.exports.getSubjectById = (req, res) => {
 		res.send({ error: 'Error getting subject', subject: [], success: 'Failed' });
 	}
 };
+module.exports.getSubjectByDeptId = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query('SELECT * FROM getsubjects s INNER JOIN program p ON p.id=s.`Sem_id` WHERE p.`dept_id`=?', [ req.params.id ], function(err, rows, fields) {
+				if (err) throw err;
+				console.log(rows);
+				res.send({ result: rows });
+				connection.release((er) => console.log(er));
+			});
+		});
+
+	} catch (e) {
+		res.send({ error: 'Error getting subject', subject: [], success: 'Failed' });
+	}
+};
+
+
 
 module.exports.getSubjectBySemId = (req, res) => {
 	try {
