@@ -1,4 +1,5 @@
 var { connection } = require("../db");
+
 module.exports.getIncharge = (req, res) => {
   try {
     connection.getConnection((err, connection) => {
@@ -115,7 +116,6 @@ module.exports.loginIncharge = (req, res) => {
         [req.body.username, req.body.password],
         function (err, rows, fields) {
           if (err) throw err;
-          console.log(rows);
           res.send({
             error: null,
             result: rows,

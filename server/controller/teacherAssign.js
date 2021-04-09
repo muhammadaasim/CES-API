@@ -99,11 +99,10 @@ module.exports.getTeacherAssignByHodID = (req, res) => {
         connection.getConnection((err, connection) => {
         if (err) throw err;
         connection.query(
-          "SELECT * FROM getassignedteachers WHERE session= ?",
+          "SELECT * FROM getassignedteachers WHERE session = ?",
           [req.params.session],
           function (err, rows, fields) {
           if (err) throw err;
-          console.log(rows);
           res.send({ result: rows });
           connection.release((er) => console.log(er));
           }
@@ -129,7 +128,6 @@ module.exports.AssignSubject = (req, res) => {
           sub_id:req.body.subid,
           t_id:req.body.tid,
           session:new Date().getFullYear(),
-          sem_id:req.body.semid,
           incharge_id:req.body.hodid,
           date:new Date().getTime()
          }],
