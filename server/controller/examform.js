@@ -47,6 +47,31 @@ module.exports.getExamFormByStdId = (req, res) => {
     });
   }
 };
+module.exports.getExamFormByDeptId = (req, res) => {
+  try {
+    connection.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        "SELECT * FROM getexamformdata WHERE dept_id=?",
+        [req.params.id],
+        function (err, rows, fields) {
+          if (err) {
+            console.log(err);
+          }
+          console.log(rows);
+          res.send({ result: rows });
+          connection.release((er) => console.log(er));
+        }
+      );
+    });
+  } catch (e) {
+    res.send({
+      error: "Error getting student",
+      result: [],
+      success: "Failed",
+    });
+  }
+};
 
 module.exports.insertExamForm = (req, res) => {
   try {
