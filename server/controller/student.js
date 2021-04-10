@@ -24,7 +24,7 @@ module.exports.getStudentById = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM GetStudent WHERE student_id= ?",
+        "SELECT * FROM GetStudent WHERE id = ?",
         [req.params.id],
         function (err, rows, fields) {
           if (err) {

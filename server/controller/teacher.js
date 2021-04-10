@@ -27,7 +27,7 @@ module.exports.getTeacherById = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM GetTeacher WHERE teacher_id= ?",
+        "SELECT * FROM GetTeacher WHERE id = ?",
         [req.params.id],
         function (err, rows, fields) {
           if (err) throw err;

@@ -1,43 +1,38 @@
 var express = require('express');
-var cors=require('cors')
+var cors = require('cors');
 var app = express();
-
 
 app.use(express.json());
 app.use(cors());
 
+var dept = require('./routes/dept');
+app.use('/dept', dept);
 
-var dept = require('./routes/dept')
-app.use('/dept', dept)
-
-var prog = require('./routes/program')
+var prog = require('./routes/program');
 app.use('/prog', prog);
 
-var semester = require('./routes/semester')
+var semester = require('./routes/semester');
 app.use('/semester', semester);
 
-var student = require('./routes/student')
+var student = require('./routes/student');
 app.use('/student', student);
 
-var subject = require('./routes/subject')
+var subject = require('./routes/subject');
 app.use('/subject', subject);
 
-
-var teacher = require('./routes/teacher')
+var teacher = require('./routes/teacher');
 app.use('/teacher', teacher);
 
-var incharge = require('./routes/incharge')
+var incharge = require('./routes/incharge');
 app.use('/incharge', incharge);
 
-var teacherassign = require('./routes/teacherAssign')
+var teacherassign = require('./routes/teacherAssign');
 app.use('/teacherassign', teacherassign);
 
-var examform = require('./routes/examform')
+var examform = require('./routes/examform');
 app.use('/examform', examform);
 
-
-
-var config = require('./routes/config')
+var config = require('./routes/config');
 app.use('/config', config);
 
-app.listen(4000, () => console.log('Server running'));
+app.listen(4000, () => console.log('Server running on PORT = 4000'));
