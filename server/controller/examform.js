@@ -27,7 +27,7 @@ module.exports.getExamFormByStdId = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM examform WHERE std_id=?",
+        "SELECT ef.id, ef.std_id, ef.session,ef.type,ef.status,ef.remarks,ef.date,sm.id 'sem_id',sm.name 'semester' FROM examform ef INNER JOIN semester sm ON sm.id=ef.sem_id WHERE std_id=?",
         [req.params.id],
         function (err, rows, fields) {
           if (err) {
