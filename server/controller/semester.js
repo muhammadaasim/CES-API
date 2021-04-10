@@ -36,7 +36,7 @@ module.exports.getSemesterByStdId = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM semester WHERE id NOT IN( SELECT sem_id FROM examform WHERE STATUS IN (0,1,3) AND  std_id=?) ', [ req.params.id ], function(err, rows, fields) {
+			connection.query("SELECT sm.id 'id', sm.name,p.id 'prog_id' FROM semester sm INNER JOIN program p ON p.id=sm.prog_id INNER JOIN student STD ON std.prog_id=p.id WHERE sm.id NOT IN( SELECT sem_id FROM examform WHERE STATUS IN (0,1,3) AND  std_id=?) AND  std.id=?", [ req.params.id,req.params.id], function(err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ result: rows });
