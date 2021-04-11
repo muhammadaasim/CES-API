@@ -29,6 +29,10 @@ app.use('/incharge', incharge);
 var teacherassign = require('./routes/teacherAssign');
 app.use('/teacherassign', teacherassign);
 
+
+var examcontroller = require('./routes/examcontroller');
+app.use('/controller', examcontroller);
+
 var examform = require('./routes/examform');
 app.use('/examform', examform);
 
