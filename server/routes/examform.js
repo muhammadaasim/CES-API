@@ -7,7 +7,7 @@ routes.get('/subject/:id', getExamFormwithsubByStdId)
 routes.get('/dept/:id', getExamFormByDeptId)
 routes.get('/:id', getExamFormByStdId)
 routes.post('/', insertExamForm)
-routes.post('/subject/', insertSubjects)
+routes.post('/subject', insertSubjects)
 routes.put('/updatestatus/:formid',UpdateStatus);
 
 
