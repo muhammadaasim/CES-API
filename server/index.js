@@ -36,6 +36,9 @@ app.use('/controller', examcontroller);
 var examform = require('./routes/examform');
 app.use('/examform', examform);
 
+var marksledger = require('./routes/marksledger');
+app.use('/marksledger', marksledger);
+
 var config = require('./routes/config');
 app.use('/config', config);
 
