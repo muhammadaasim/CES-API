@@ -5,7 +5,7 @@ module.exports.GetExamController = (req, res) => {
       if (err) throw err;
       console.log("MySQL Connection Established: ", connection.threadId);
       connection.query(
-        "SELECT * FROM controller",
+        "SELECT * FROM examcontroller",
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
@@ -27,7 +27,7 @@ module.exports.getControllerById = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM controller WHERE id = ",
+        "SELECT * FROM examcontroller WHERE id = ",
         [req.params.id],
         function (err, rows, fields) {
           if (err) throw err;
@@ -51,7 +51,7 @@ module.exports.insertController = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `insert into controller  SET ?  `,
+        `insert into examcontroller  SET ?  `,
         [
           {
             fullname: req.body.fullname,
@@ -86,7 +86,7 @@ module.exports.loginController = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `SELECT id FROM controller WHERE username = ? AND password = ?`,
+        `SELECT id FROM examcontroller WHERE username = ? AND password = ?`,
         [req.body.username, req.body.password],
         function (err, rows, fields) {
           if (err) throw err;

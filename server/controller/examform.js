@@ -112,7 +112,7 @@ module.exports.insertSubjects = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`insert into f_form_subject values( ?,?)`, [ req.body.fid, req.body.subid ], function(
+			connection.query(`insert into f_form_subject values(?,?)`, [ req.body.fid, req.body.subid ], function(
 				err,
 				rows,
 				fields
@@ -129,7 +129,7 @@ module.exports.insertSubjects = (req, res) => {
 		});
 	} catch (e) {
 		res.send({
-			error: 'Error getting student',
+			error: 'Error getting form data',
 			result: [],
 			success: 'Failed'
 		});

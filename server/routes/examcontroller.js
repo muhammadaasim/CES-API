@@ -4,7 +4,7 @@ var {GetExamController,getControllerById,loginController,insertController} = req
 
 routes.get('/', GetExamController)
 routes.post('/', insertController)
-routes.post('/login', loginController)
+routes.post('/login/', loginController)
 routes.get('/:id', getControllerById)
 
 module.exports = routes;
