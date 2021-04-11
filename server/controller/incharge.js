@@ -28,7 +28,7 @@ module.exports.getInchargeById = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM GetIncharge WHERE incharge_id= ?",
+        "SELECT * FROM GetIncharge WHERE id= ?",
         [req.params.id],
         function (err, rows, fields) {
           if (err) throw err;
