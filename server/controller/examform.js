@@ -5,7 +5,7 @@ module.exports.getExamforms = (req, res) => {
       if (err) throw err;
       console.log("MySQL Connection Established: ", connection.threadId);
       connection.query(
-        "SELECT ef.id, ef.std_id, ef.session,ef.type,ef.status,ef.remarks,ef.date,sm.id 'sem_id',sm.name 'semester' FROM examform ef INNER JOIN semester sm ON sm.id=ef.sem_id ",
+        "SELECT * FROM getexamformdata",
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
