@@ -75,24 +75,39 @@ module.exports.insertTeacher = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `insert into teacher  SET ?  `,
-        [
-          {
-            fullname: req.body.fullname,
-            surname: req.body.surname,
-            dept_id: req.body.dept_id,
-            username: req.body.username,
-            password: req.body.password,
-          },
-        ],
+        `SELECT * FROM teacher WHERE cnic = ? `,
+        [req.body.cnic],
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
-          res.send({
-            error: null,
-            message: "Insert successfully",
-            result: rows,
-          });
+          if (rows.length > 0) {
+            res.send({ error: "CNIC Already exists" })
+          }
+          else {
+            connection.query(
+              `insert into teacher  SET ?  `,
+              [
+                {
+                  fullname: req.body.fullname,
+                  surname: req.body.surname,
+                  dept_id: req.body.dept_id,
+                  username: req.body.username,
+                  password: req.body.password,
+                  cnic: req.body.cnic
+                },
+              ],
+              function (err, rows, fields) {
+                if (err) throw err;
+                console.log(rows);
+                res.send({
+                  error: null,
+                  message: "Insert successfully",
+                  result: rows,
+                });
+              }
+            );
+          }
+
           connection.release((er) => console.log(er));
         }
       );

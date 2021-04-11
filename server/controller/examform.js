@@ -83,7 +83,7 @@ module.exports.insertExamForm = (req, res) => {
 						sem_id: req.body.sem_id,
 						type: req.body.type,
 						status: 0,
-						remarks: '',
+						remarks: "",
 						date: new Date().getTime()
 					}
 				],

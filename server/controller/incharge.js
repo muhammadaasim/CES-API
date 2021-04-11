@@ -76,36 +76,52 @@ module.exports.insertIncharge = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `insert into deptincharge  SET ?  `,
-        [
-          {
-            fullname: req.body.fullname,
-            caste: req.body.caste,
-            dept_id: req.body.dept_id,
-            username: req.body.username,
-            password: req.body.password,
-          },
-        ],
+        `SELECT * FROM deptincharge WHERE cnic = ? `,
+        [req.body.cnic],
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
-          res.send({
-            error: null,
-            message: "Insert successfully",
-            result: rows,
-          });
+          if (rows.length > 0) {
+            res.send({ error: "CNIC Already exists" })
+          }
+          else {
+            connection.query(
+              `insert into deptincharge  SET ?  `,
+              [
+                {
+                  fullname: req.body.fullname,
+                  caste: req.body.caste,
+                  dept_id: req.body.dept_id,
+                  username: req.body.username,
+                  password: req.body.password,
+                  cnic: req.body.cnic
+                },
+              ],
+              function (err, rows, fields) {
+                if (err) throw err;
+                console.log(rows);
+                res.send({
+                  error: null,
+                  message: "Insert successfully",
+                  result: rows,
+                });
+              }
+            );
+          }
+
           connection.release((er) => console.log(er));
         }
       );
     });
   } catch (e) {
     res.send({
-      error: "Error getting Incharge",
+      error: "Error getting teacher",
       result: [],
       success: "Failed",
     });
   }
 };
+
 
 module.exports.loginIncharge = (req, res) => {
   try {

@@ -92,7 +92,7 @@ module.exports.insertStudent = (req, res) => {
             district: req.body.district,
             address: req.body.address,
             fathername: req.body.fathername,
-            insertiondate: new Date().getTime()
+            insertiondate: new Date().getTime(),
           },
         ],
         function (err, rows, fields) {
