@@ -4,7 +4,7 @@ module.exports.getTeacherAssign = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			console.log('MySQL Connection Established: ', connection.threadId);
-			connection.query('SELECT * FROM getassignedteachers', function(err, rows, fields) {
+			connection.query('SELECT * FROM getassignedteachers', function (err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ error: '', success: 'success', result: rows });
@@ -23,7 +23,7 @@ module.exports.getTeacherAssignByID = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM getassignedteachers WHERE teacher_id= ?', [ req.params.id ], function(
+			connection.query('SELECT * FROM getassignedteachers WHERE teacher_id= ?', [req.params.id], function (
 				err,
 				rows,
 				fields
@@ -47,7 +47,7 @@ module.exports.getTeacherAssignByHodID = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM getassignedteachers WHERE incharge_id= ?', [ req.params.id ], function(
+			connection.query('SELECT * FROM getassignedteachers WHERE incharge_id= ?', [req.params.id], function (
 				err,
 				rows,
 				fields
@@ -71,7 +71,7 @@ module.exports.getTeacherAssignBySemID = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM getassignedteachers WHERE sem_id= ?', [ req.params.id ], function(
+			connection.query('SELECT * FROM getassignedteachers WHERE sem_id= ?', [req.params.id], function (
 				err,
 				rows,
 				fields
@@ -95,7 +95,7 @@ module.exports.getTeacherAssignBySession = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM getassignedteachers WHERE session = ?', [ req.params.session ], function(
+			connection.query('SELECT * FROM getassignedteachers WHERE session = ?', [req.params.session], function (
 				err,
 				rows,
 				fields
@@ -113,6 +113,50 @@ module.exports.getTeacherAssignBySession = (req, res) => {
 		});
 	}
 };
+
+
+module.exports.teacherassignedsubjectformByTid = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			console.log('MySQL Connection Established: ', connection.threadId);
+			connection.query('SELECT * FROM teacherassignedsubjectform where teacher_id=?', [req.params.id], function (err, rows, fields) {
+				if (err) throw err;
+				console.log(rows);
+				res.send({ error: '', success: 'success', result: rows });
+				connection.release((err) => console.log(err));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting data',
+			subject: [],
+			success: 'Failed'
+		});
+	}
+};
+module.exports.teacherassignedsubjectform = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			console.log('MySQL Connection Established: ', connection.threadId);
+			connection.query('SELECT * FROM teacherassignedsubjectform', function (err, rows, fields) {
+				if (err) throw err;
+				console.log(rows);
+				res.send({ error: '', success: 'success', result: rows });
+				connection.release((err) => console.log(err));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting data',
+			subject: [],
+			success: 'Failed'
+		});
+	}
+};
+
+
 module.exports.AssignSubject = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
@@ -128,7 +172,7 @@ module.exports.AssignSubject = (req, res) => {
 						date: new Date().getTime()
 					}
 				],
-				function(err, rows, fields) {
+				function (err, rows, fields) {
 					if (err) throw err;
 					console.log(rows);
 					res.send({
