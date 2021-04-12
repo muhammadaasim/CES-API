@@ -4,12 +4,15 @@ module.exports.getExamforms = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       console.log("MySQL Connection Established: ", connection.threadId);
-      connection.query("SELECT * FROM examform ", function (err, rows, fields) {
-        if (err) throw err;
-        console.log(rows);
-        res.send({ error: "", success: "success", result: rows });
-        connection.release((err) => console.log(err));
-      });
+      connection.query(
+        "SELECT * FROM examform ",
+        function (err, rows, fields) {
+          if (err) throw err;
+          console.log(rows);
+          res.send({ error: "", success: "success", result: rows });
+          connection.release((err) => console.log(err));
+        }
+      );
     });
   } catch (e) {
     res.send({
@@ -19,12 +22,12 @@ module.exports.getExamforms = (req, res) => {
     });
   }
 };
-module.exports.getStudentById = (req, res) => {
+module.exports.getExamFormByStdId = (req, res) => {
   try {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM GetStudent WHERE student_id= ?",
+        "SELECT * FROM examform WHERE std_id=?",
         [req.params.id],
         function (err, rows, fields) {
           if (err) {
@@ -83,6 +86,34 @@ module.exports.insertExamForm = (req, res) => {
   }
 };
 
+module.exports.insertSubjects = (req, res) => {
+  try {
+    connection.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        `insert into f_form_subject values( ?,?)`,
+        [req.body.fid, req.body.subid],
+        function (err, rows, fields) {
+          if (err) throw err;
+          console.log(rows);
+          res.send({
+            error: null,
+            message: "Insert successfully",
+            result: req.body.fid,
+          });
+          connection.release((er) => console.log(er));
+        }
+      );
+    });
+  } catch (e) {
+    res.send({
+      error: "Error getting student",
+      result: [],
+      success: "Failed",
+    });
+  }
+};
+
 module.exports.UpdateStatus = (req, res) => {
   try {
     connection.getConnection((err, connection) => {
@@ -112,44 +143,54 @@ module.exports.UpdateStatus = (req, res) => {
   }
 };
 
-// module.exports.updateStudent = (req, res) => {
-//   try {
-//     connection.getConnection((err, connection) => {
-//       if (err) throw err;
-//       connection.query(
-//         `UPDATE student SET ?  WHERE id=?`,
-//         [
-//           {
-//             rollno: req.body.rollno,
-//             fullname: req.body.fullname,
-//             prog_id: req.body.prog_id,
-//             caste: req.body.caste,
-//             dateofbirth: req.body.dateofbirth,
-//             religion: req.body.religion,
-//             gender: req.body.gender,
-//             nationality: req.body.nationality,
-//             username: req.body.username,
-//             password: req.body.password,
-//           },
-//           req.params.id,
-//         ],
-//         function (err, rows, fields) {
-//           if (err) throw err;
-//           console.log(rows);
-//           res.send({
-//             error: null,
-//             message: "Updated Successful",
-//             result: rows,
-//           });
-//           connection.release((er) => console.log(er));
-//         }
-//       );
-//     });
-//   } catch (e) {
-//     res.send({
-//       error: "Error getting student",
-//       result: [],
-//       success: "Failed",
-//     });
-//   }
+
 // };
+
+module.exports.getExamformswithsubj = (req, res) => {
+  try {
+    connection.getConnection((err, connection) => {
+      if (err) throw err;
+      console.log("MySQL Connection Established: ", connection.threadId);
+      connection.query(
+        "SELECT * FROM getexamforms ",
+        function (err, rows, fields) {
+          if (err) throw err;
+          console.log(rows);
+          res.send({ error: "", success: "success", result: rows });
+          connection.release((err) => console.log(err));
+        }
+      );
+    });
+  } catch (e) {
+    res.send({
+      error: "Error getting examform",
+      result: [],
+      success: "Failed",
+    });
+  }
+};
+module.exports.getExamFormwithsubByStdId = (req, res) => {
+  try {
+    connection.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        "SELECT * FROM getexamforms WHERE student_id=?",
+        [req.params.id],
+        function (err, rows, fields) {
+          if (err) {
+            console.log(err);
+          }
+          console.log(rows);
+          res.send({ result: rows });
+          connection.release((er) => console.log(er));
+        }
+      );
+    });
+  } catch (e) {
+    res.send({
+      error: "Error getting student",
+      result: [],
+      success: "Failed",
+    });
+  }
+};
