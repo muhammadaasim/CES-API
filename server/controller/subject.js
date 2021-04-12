@@ -35,7 +35,7 @@ module.exports.getSubjectByDeptId = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM getsubjects s INNER JOIN program p ON p.id=s.`Sem_id` WHERE p.`dept_id`=?', [ req.params.id ], function(err, rows, fields) {
+			connection.query('select * from getsubjbydept where dept_id=?', [ req.params.id ], function(err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ result: rows });

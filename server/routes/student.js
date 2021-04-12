@@ -10,4 +10,4 @@ routes.get('/:id', getStudentById)
 routes.get('/dept/:id', getStudentDeptId)
 routes.put('/:id', updateStudent)
 
-module.exports = routes;
+module.exports = routes;    
