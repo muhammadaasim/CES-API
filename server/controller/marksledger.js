@@ -48,7 +48,7 @@ module.exports.GetMarksByDept = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM getmarks where dept_id=?', [ req.params.id ], function(
+			connection.query('SELECT * FROM getmark where dept_id=?', [ req.params.id ], function(
 				err,
 				rows,
 				fields
@@ -82,9 +82,11 @@ module.exports.insertMarksLedger = (req, res) => {
 						sub_id:req.body.sub_id,
 						t_id:req.body.t_id,
 						f_id:req.body.f_id,
-						mark:req.body.mark,
+						midmark:req.body.midmark,
 						status:0,
-						date: new Date().getTime()
+						date: new Date().getTime(),
+						sessionalmark:req.body.sessionalmark,
+						finalmark: req.body.finalmark
 					}
 				],
 				function(err, rows, fields) {
