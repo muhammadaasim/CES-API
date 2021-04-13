@@ -108,8 +108,8 @@ module.exports.UpdateStatus = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
-				`UPDATE marks_ledger SET status = ? WHERE  id = ?`,
-				[ req.body.status, req.params.id ],
+				`UPDATE marks_ledger SET status = ? and remarks=? WHERE  id = ?`,
+				[ req.body.status,req.body.remarks, req.params.id ],
 				function(err, rows, fields) {
 					if (err) throw err;
 					console.log(rows);
