@@ -120,7 +120,7 @@ module.exports.teacherassignedsubjectformByTid = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			console.log('MySQL Connection Established: ', connection.threadId);
-			connection.query('SELECT * FROM teacherassignedsubjectform where teacher_id=?', [req.params.id], function (err, rows, fields) {
+			connection.query('SELECT * FROM teacherassignedsubjectform WHERE teacher_id=?', [req.params.id], function (err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ error: '', success: 'success', result: rows });
