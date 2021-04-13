@@ -4,7 +4,7 @@ var {getIncharge,getInchargeById,getInchargeByDept,insertIncharge,loginIncharge}
 
 routes.get('/', getIncharge)
 routes.post('/', insertIncharge)
-routes.post('/login', loginIncharge)
+routes.post('/login/', loginIncharge)
 routes.get('/dept/:id', getInchargeByDept)
 routes.get('/:id', getInchargeById)
 
