@@ -135,7 +135,7 @@ module.exports.updateIsMarked = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`UPDATE examform SET ismarked = 1 WHERE  id = ?`, [ req.body.id ], function(
+			connection.query(`UPDATE examform SET ismarked = ? WHERE  id = ?`, [req.body.ismarked, req.body.id ], function(
 				err,
 				rows,
 				fields
