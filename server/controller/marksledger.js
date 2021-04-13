@@ -23,18 +23,14 @@ module.exports.getMarksByFormID = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(
-				"select * from getmarks where form_id= ?",
-				[ req.params.id ],
-				function(err, rows, fields) {
-					if (err) {
-						console.log(err);
-					}
-					console.log(rows);
-					res.send({ result: rows });
-					connection.release((er) => console.log(er));
+			connection.query('select * from getmark where form_id= ?', [ req.params.id ], function(err, rows, fields) {
+				if (err) {
+					console.log(err);
 				}
-			);
+				console.log(rows);
+				res.send({ result: rows });
+				connection.release((er) => console.log(er));
+			});
 		});
 	} catch (e) {
 		res.send({
@@ -48,11 +44,7 @@ module.exports.GetMarksByDept = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM getmark where dept_id=?', [ req.params.id ], function(
-				err,
-				rows,
-				fields
-			) {
+			connection.query('SELECT * FROM getmark where dept_id=?', [ req.params.id ], function(err, rows, fields) {
 				if (err) {
 					console.log(err);
 				}
@@ -78,15 +70,15 @@ module.exports.insertMarksLedger = (req, res) => {
 				`INSERT INTO marks_ledger SET ?`,
 				[
 					{
-						std_id:req.body.std_id,
-						sub_id:req.body.sub_id,
-						t_id:req.body.t_id,
-						f_id:req.body.f_id,
-						midmark:req.body.midmark,
-						status:0,
+						std_id: req.body.std_id,
+						sub_id: req.body.sub_id,
+						t_id: req.body.t_id,
+						f_id: req.body.f_id,
+						midmark: req.body.midmark,
+						status: 1,
 						date: new Date().getTime(),
 						sessionalmark:req.body.sessionalmark,
-						finalmark: req.body.finalmark
+						finalmark:req.body.finalmark
 					}
 				],
 				function(err, rows, fields) {
@@ -142,19 +134,20 @@ module.exports.updateIsMarked = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(
-				`UPDATE examform SET ismarked = 1 WHERE  id = ?`,[ req.body.id ],
-				function(err, rows, fields) {
-					if (err) throw err;
-					console.log(rows);
-					res.send({
-						error: null,
-						message: 'Update successfully',
-						result: rows
-					});
-					connection.release((er) => console.log(er));
-				}
-			);
+			connection.query(`UPDATE examform SET ismarked = 1 WHERE  id = ?`, [ req.body.id ], function(
+				err,
+				rows,
+				fields
+			) {
+				if (err) throw err;
+				console.log(rows);
+				res.send({
+					error: null,
+					message: 'Update successfully',
+					result: rows
+				});
+				connection.release((er) => console.log(er));
+			});
 		});
 	} catch (e) {
 		res.send({
