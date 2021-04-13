@@ -63,45 +63,76 @@ module.exports.getTeacherAssignByHodID = (req, res) => {
 	  });
 	} catch (e) {
 	  res.send({
-		error: "Error getting subject",
+		error: "Error getting teacher assign data",
 		subject: [],
 		success: "Failed",
 	  });
 	}
   };
 
-
-module.exports.getSubjectBySemId = (req, res) => {
-  try {
-    connection.getConnection((err, connection) => {
+  module.exports.getTeacherAssignBySemID = (req, res) => {
+    try {
+      connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM GetSubjects WHERE sem_id== ?",
+        "SELECT * FROM getassignedteachers WHERE sem_id= ?",
         [req.params.id],
         function (err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+        res.send({ result: rows });
+        connection.release((er) => console.log(er));
+        }
+      );
+      });
+    } catch (e) {
+      res.send({
+      error: "Error in getting teacher assign data",
+      subject: [],
+      success: "Failed",
+      });
+    }
+    };
+  
+    module.exports.getTeacherAssignBySession = (req, res) => {
+      try {
+        connection.getConnection((err, connection) => {
+        if (err) throw err;
+        connection.query(
+          "SELECT * FROM getassignedteachers WHERE session= ?",
+          [req.params.session],
+          function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
           res.send({ result: rows });
           connection.release((er) => console.log(er));
-        }
-      );
-    });
-  } catch (e) {
-    res.send({
-      error: "Error getting subject",
-      subject: [],
-      success: "Failed",
-    });
-  }
-};
+          }
+        );
+        });
+      } catch (e) {
+        res.send({
+        error: "Error in getting teacher  data",
+        subject: [],
+        success: "Failed",
+        });
+      }
+      };
+  
 
-module.exports.insertSubject = (req, res) => {
+module.exports.AssignSubject = (req, res) => {
   try {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `INSERT INTO subject  SET ?  `,
-        [{ name: req.body.name, sem_id: req.body.sem_id }],
+        `INSERT INTO f_subject_teacher_assign  SET ?  `,
+        [{ 
+          sub_id:req.body.subid,
+          t_id:req.body.tid,
+          session:new Date().getFullYear(),
+          sem_id:req.body.semid,
+          incharge_id:req.body.hodid,
+          date:new Date().getTime()
+         }],
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
@@ -116,7 +147,7 @@ module.exports.insertSubject = (req, res) => {
     });
   } catch (e) {
     res.send({
-      error: "Error getting subject",
+      error: "Error WHile Inserting Teacher assign data",
       subject: [],
       success: "Failed",
     });
