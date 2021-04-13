@@ -79,7 +79,8 @@ module.exports.insertMarksLedger = (req, res) => {
 						date: new Date().getTime(),
 						sessionalmark: req.body.sessionalmark,
 						finalmark: req.body.finalmark,
-						totalmark: parseInt( req.body.midmark) + parseInt(req.body.sessionalmark) +parseInt(req.body.finalmark)
+						totalmark: parseInt( req.body.midmark) + parseInt(req.body.sessionalmark) +parseInt(req.body.finalmark),
+						remarks:""
 					}
 				],
 				function(err, rows, fields) {
@@ -108,7 +109,7 @@ module.exports.UpdateStatus = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
-				`UPDATE marks_ledger SET status = ? and remarks=? WHERE  id = ?`,
+				`UPDATE marks_ledger SET status = ? , remarks=? WHERE  id = ?`,
 				[ req.body.status,req.body.remarks, req.params.id ],
 				function(err, rows, fields) {
 					if (err) throw err;

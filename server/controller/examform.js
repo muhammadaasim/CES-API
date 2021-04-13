@@ -143,7 +143,7 @@ module.exports.UpdateStatus = (req, res) => {
 			if (err) throw err;
 			connection.query(
 				// `update config  SET isenabled = ?  WHERE id = ? `,[req.body.isenabled,req.params.id],
-				`UPDATE examform SET status = ? and remarks=? WHERE  id = ?`,
+				`UPDATE examform SET status = ?, remarks=? WHERE  id = ?`,
 				[ req.body.status,req.body.remarks, req.params.formid ],
 				function(err, rows, fields) {
 					if (err) throw err;
