@@ -4,7 +4,7 @@ module.exports.getMarks = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			console.log('MySQL Connection Established: ', connection.threadId);
-			connection.query('SELECT * FROM getmark', function(err, rows, fields) {
+			connection.query('SELECT * FROM getmarksled', function(err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ error: '', success: 'success', result: rows });
@@ -19,11 +19,11 @@ module.exports.getMarks = (req, res) => {
 		});
 	}
 };
-module.exports.getMarksByFormID = (req, res) => {
+module.exports.getMarksByHodID = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('select * from getmark where form_id= ?', [ req.params.id ], function(err, rows, fields) {
+			connection.query('select * from getmarksled where hod_id= ?', [ req.params.id ], function(err, rows, fields) {
 				if (err) {
 					console.log(err);
 				}

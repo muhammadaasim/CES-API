@@ -2,7 +2,7 @@ var routes = require('express').Router();
 
 var {
 	getMarks,
-	getMarksByFormID,
+	getMarksByHodID,
 	GetMarksByDept,
 	UpdateStatus,
 	updateIsMarked,
@@ -11,7 +11,7 @@ var {
 
 routes.get('/', getMarks);
 routes.post('/', insertMarksLedger);
-routes.get('/:id', getMarksByFormID);
+routes.get('/hod/:id', getMarksByHodID);
 routes.get('/dept/:id', GetMarksByDept);
 routes.put('/updatestatus/:id', UpdateStatus);
 routes.put('/ismarked', updateIsMarked);
