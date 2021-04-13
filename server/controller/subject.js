@@ -36,7 +36,7 @@ module.exports.getSubjectBySemId = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM GetSubjects WHERE sem_id== ?', [ req.params.id ], function(err, rows, fields) {
+			connection.query('SELECT * FROM GetSubjects WHERE sem_id= ?', [ req.params.id ], function(err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ result: rows });
