@@ -84,7 +84,8 @@ module.exports.insertExamForm = (req, res) => {
 						type: req.body.type,
 						status: 0,
 						remarks: "",
-						date: new Date().getTime()
+						date: new Date().getTime(),
+						ismarked:1
 					}
 				],
 				function(err, rows, fields) {

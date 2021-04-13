@@ -4,7 +4,7 @@ module.exports.getMarks = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			console.log('MySQL Connection Established: ', connection.threadId);
-			connection.query('SELECT * FROM getmarks', function(err, rows, fields) {
+			connection.query('SELECT * FROM getmark', function(err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ error: '', success: 'success', result: rows });
@@ -115,6 +115,33 @@ module.exports.UpdateStatus = (req, res) => {
 			connection.query(
 				`UPDATE marks_ledger SET status = ? WHERE  id = ?`,
 				[ req.body.status, req.params.id ],
+				function(err, rows, fields) {
+					if (err) throw err;
+					console.log(rows);
+					res.send({
+						error: null,
+						message: 'Update successfully',
+						result: rows
+					});
+					connection.release((er) => console.log(er));
+				}
+			);
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting updating data',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
+module.exports.updateIsMarked = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query(
+				`UPDATE examform SET ismarked = 1 WHERE  id = ?`,[ req.body.id ],
 				function(err, rows, fields) {
 					if (err) throw err;
 					console.log(rows);
