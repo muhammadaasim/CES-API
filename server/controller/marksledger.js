@@ -77,9 +77,9 @@ module.exports.insertMarksLedger = (req, res) => {
 						midmark: req.body.midmark,
 						status: 1,
 						date: new Date().getTime(),
-						sessionalmark:req.body.sessionalmark,
-						finalmark:req.body.finalmark,
-						totalmark:req.body.totalmark
+						sessionalmark: req.body.sessionalmark,
+						finalmark: req.body.finalmark,
+						totalmark: req.body.midmark + req.body.sessionalmark + req.body.finalmark
 					}
 				],
 				function(err, rows, fields) {
