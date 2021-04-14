@@ -68,6 +68,7 @@ module.exports.getSemesterByProgId = (req, res) => {
 	}
 };
 
+
 module.exports.insertSemester = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {

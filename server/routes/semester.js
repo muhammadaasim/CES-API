@@ -1,6 +1,6 @@
 var routes = require('express').Router();
 
-var {getSemester,insertSemester,getSemesterById,getSemesterByProgId,getSemesterByStdId} = require('../controller/semester')
+var {getSemester,insertSemester,getSemesterById,getSemesterByProgId,getSemesterByStdId,getSemesterByDeptId} = require('../controller/semester')
 routes.get('/', getSemester)
 routes.post('/', insertSemester)
 routes.get('/std/:id/:id', getSemesterByStdId)

@@ -19,6 +19,30 @@ module.exports.getMarks = (req, res) => {
 		});
 	}
 };
+
+module.exports.Getmarksheet = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query('select * from getmarksheet where std_id=? and sem_id=? and status=4', [ req.params.std_id,req.params.sem_id ], function(err, rows, fields) {
+				if (err) {
+					console.log(err);
+				}
+				console.log(rows);
+				res.send({ result: rows });
+				connection.release((er) => console.log(er));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
+
 module.exports.getMarksByHodID = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
