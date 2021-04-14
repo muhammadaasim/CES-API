@@ -113,7 +113,7 @@ module.exports.insertSubjects = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`insert into f_form_subject values(?,?)`, [ req.body.fid, req.body.subid ], function(
+			connection.query(`insert into f_form_subject SET ?`, [{f_id: req.body.fid,sub_id: req.body.subid }], function(
 				err,
 				rows,
 				fields
