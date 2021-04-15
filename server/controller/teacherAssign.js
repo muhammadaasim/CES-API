@@ -197,7 +197,7 @@ module.exports.deassign = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`UPDATE f_subject_teacher_assign SET isdisabled = 1 WHERE  id = ?`, [req.body.id ], function(
+			connection.query(`UPDATE f_subject_teacher_assign SET isdisabled = ? WHERE  id = ?`, [req.body.isdisabled,req.body.id ], function(
 				err,
 				rows,
 				fields

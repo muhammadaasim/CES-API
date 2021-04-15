@@ -5,7 +5,7 @@ var { getTeacherAssign,getTeacherAssignByID,getTeacherAssignByHodID,teacherassig
 routes.get('/',getTeacherAssign)
 routes.post('/', AssignSubject)
 routes.get('/form/:id',teacherassignedsubjectformByTid)
-routes.post('/deassign/',deassign)
+routes.put('/deassign/',deassign)
 routes.get('/form',teacherassignedsubjectform)
 routes.get('/:id', getTeacherAssignByID)
 routes.get('/session/:session', getTeacherAssignBySession)

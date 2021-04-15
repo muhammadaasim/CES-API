@@ -9,6 +9,6 @@ routes.post('/login', loginStudent)
 
 routes.get('/:id', getStudentById)
 routes.get('/dept/:id', getStudentDeptId)
-routes.put('/:id', updateStudent)
+routes.put('/update/:id', updateStudent)
 
 module.exports = routes;    
