@@ -1,8 +1,8 @@
 var routes = require('express').Router();
 
-var {getStudent,insertStudent,getStudentById,updateStudent,loginStudent,getStudentDeptId,disable} = require('../controller/student')
+var {getStudent,insertStudent,getStudentById,updateStudent,loginStudent,getStudentDeptId,status} = require('../controller/student')
 routes.get('/', getStudent)
-routes.put('/disable/', disable)
+routes.put('/status/', status)
 routes.post('/', insertStudent)
 
 routes.post('/login', loginStudent)

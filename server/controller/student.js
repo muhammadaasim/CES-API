@@ -126,15 +126,18 @@ module.exports.updateStudent = (req, res) => {
           {
             rollno: req.body.rollno,
             fullname: req.body.fullname,
+            fathername:req.body.fathername,
             prog_id: req.body.prog_id,
             caste: req.body.caste,
             dateofbirth: req.body.dateofbirth,
             religion: req.body.religion,
             gender: req.body.gender,
             nationality: req.body.nationality,
+            district:req.body.district,
+            address:req.body.address,
             username: req.body.username,
             password: req.body.password,
-            isdisabled:0
+            isdisabled:req.body.isdisabled
           },
           req.params.id,
         ],
@@ -158,13 +161,13 @@ module.exports.updateStudent = (req, res) => {
     });
   }
 };
-module.exports.disable = (req, res) => {
+module.exports.status = (req, res) => {
   try {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `UPDATE student SET isdisabled=1 WHERE id=?`,
-        [
+        `UPDATE student SET isdisabled=? WHERE id=?`,
+        [ req.body.isdisabled,
           req.body.id,
         ],
         function (err, rows, fields) {
@@ -172,7 +175,7 @@ module.exports.disable = (req, res) => {
           console.log(rows);
           res.send({
             error: null,
-            message: "disable Successful",
+            message: "status changes Successful",
             result: rows,
           });
           connection.release((er) => console.log(er));
