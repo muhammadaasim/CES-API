@@ -134,6 +134,7 @@ module.exports.updateStudent = (req, res) => {
             nationality: req.body.nationality,
             username: req.body.username,
             password: req.body.password,
+            isdisabled:0
           },
           req.params.id,
         ],
@@ -157,12 +158,42 @@ module.exports.updateStudent = (req, res) => {
     });
   }
 };
+module.exports.disable = (req, res) => {
+  try {
+    connection.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        `UPDATE student SET isdisabled=1 WHERE id=?`,
+        [
+          req.body.id,
+        ],
+        function (err, rows, fields) {
+          if (err) throw err;
+          console.log(rows);
+          res.send({
+            error: null,
+            message: "disable Successful",
+            result: rows,
+          });
+          connection.release((er) => console.log(er));
+        }
+      );
+    });
+  } catch (e) {
+    res.send({
+      error: "Error getting student",
+      result: [],
+      success: "Failed",
+    });
+  }
+};
+
 module.exports.loginStudent = (req, res) => {
   try {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `SELECT id FROM student WHERE username = ? AND password = ?`,
+        `SELECT id FROM student WHERE username = ? AND password = ? and isdisabled=0`,
         [ req.body.username,req.body.password  ],
         function (err, rows, fields) {
           if (err) throw err;
