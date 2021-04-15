@@ -82,7 +82,8 @@ module.exports.insertTeacher = (req, res) => {
 								dept_id: req.body.dept_id,
 								username: req.body.username,
 								password: req.body.password,
-								cnic: req.body.cnic
+								cnic: req.body.cnic,
+								isdisabled:0
 							}   
 						],
 						function(err, rows, fields) {
@@ -114,7 +115,7 @@ module.exports.loginTeacher = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
-				`SELECT id FROM teacher WHERE username = ? AND password = ?`,
+				`SELECT id FROM teacher WHERE username = ? AND password = ? AND isdisabled=0`,
 				[ req.body.username, req.body.password ],
 				function(err, rows, fields) {
 					if (err) throw err;
