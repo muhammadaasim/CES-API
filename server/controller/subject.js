@@ -71,7 +71,12 @@ module.exports.insertSubject = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`INSERT INTO subject  SET ?  `,  [{name: req.body.name ,sem_id: req.body.sem_id,credit_hour:req.body.credit_hour,course_code:req.body.course_code,type:req.body.type }], function(err, rows, fields) {
+			connection.query(`INSERT INTO subject  SET ?  `, [
+				{
+					name: req.body.name,
+					sem_id: req.body.sem_id,
+					credit_hour: req.body.credit_hour, course_code: req.body.course_code, type: req.body.type
+				}], function (err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ error: null, message: 'Insert successfully', result: rows });

@@ -68,7 +68,6 @@ module.exports.getStudentDeptId = (req, res) => {
 };
 
 module.exports.insertStudent = (req, res) => {
-	console.log(req);
 	try {
 		if (!req.file) {
 			res.send({ success: false });
@@ -82,16 +81,17 @@ module.exports.insertStudent = (req, res) => {
 						{
 							rollno: req.body.rollno,
 							fullname: req.body.fullname,
-							prog_id: req.body.prog_id,
+							prog_id: parseInt(req.body.prog_id),
 							caste: req.body.caste,
 							dateofbirth: req.body.dateofbirth,
 							religion: req.body.religion,
-							gender: req.body.gender,
+							gender: parseInt(req.body.gender),
 							nationality: req.body.nationality,
 							username: req.body.username,
 							password: req.body.password,
 							district: req.body.district,
 							address: req.body.address,
+							isdisabled: 0,
 							fathername: req.body.fathername,
 							insertiondate: new Date().getTime(),
 							image: url + '/uploads/' + req.file.filename
@@ -121,6 +121,7 @@ module.exports.insertStudent = (req, res) => {
 
 module.exports.updateStudent = (req, res) => {
 	try {
+		const url = req.protocol + '://' + req.get('host');
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
@@ -140,7 +141,8 @@ module.exports.updateStudent = (req, res) => {
 						address: req.body.address,
 						username: req.body.username,
 						password: req.body.password,
-						isdisabled: req.body.isdisabled
+						isdisabled: req.body.isdisabled,
+						image: url + '/uploads/' + req.file.filename
 					},
 					req.params.id
 				],

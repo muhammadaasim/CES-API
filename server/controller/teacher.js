@@ -65,6 +65,7 @@ module.exports.getTeacherByDept = (req, res) => {
 
 module.exports.insertTeacher = (req, res) => {
 	try {
+		const url = req.protocol + '://' + req.get('host');
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(`SELECT * FROM teacher WHERE cnic = ? `, [ req.body.cnic ], function(err, rows, fields) {
@@ -83,8 +84,9 @@ module.exports.insertTeacher = (req, res) => {
 								username: req.body.username,
 								password: req.body.password,
 								cnic: req.body.cnic,
-								isdisabled:0
-							}   
+								isdisabled: 0,
+								image: url + '/uploads/' + req.file.filename
+							}
 						],
 						function(err, rows, fields) {
 							if (err) throw err;

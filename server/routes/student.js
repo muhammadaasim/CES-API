@@ -19,6 +19,6 @@ routes.post('/login', loginStudent);
 
 routes.get('/:id', getStudentById);
 routes.get('/dept/:id', getStudentDeptId);
-routes.put('/update/:id', updateStudent);
+routes.put('/update/:id', upload.single('image'), updateStudent);
 
 module.exports = routes;
