@@ -73,6 +73,7 @@ module.exports.getInchargeByDept = (req, res) => {
 
 module.exports.insertIncharge = (req, res) => {
   try {
+    const url = req.protocol + '://' + req.get('host');
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
@@ -91,10 +92,11 @@ module.exports.insertIncharge = (req, res) => {
                 {
                   fullname: req.body.fullname,
                   caste: req.body.caste,
-                  dept_id: req.body.dept_id,
+                  dept_id: parseInt( req.body.dept_id),
                   username: req.body.username,
                   password: req.body.password,
-                  cnic: req.body.cnic
+                  cnic: req.body.cnic,
+                  image: url + '/uploads/' + req.file.filename
                 },
               ],
               function (err, rows, fields) {

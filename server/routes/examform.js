@@ -1,5 +1,5 @@
 var routes = require('express').Router();
-
+var {upload} = require('../index')
 var {
 	insertExamForm,
 	UpdateStatus,
@@ -18,7 +18,7 @@ routes.get('/subject/:id', getExamFormwithsubByStdId);
 routes.get('/form/:id', getExamFormwithsubByFormId);
 routes.get('/dept/:id', getExamFormByDeptId);
 routes.get('/:id', getExamFormByStdId);
-routes.post('/', insertExamForm);
+routes.post('/', upload.single('image'),insertExamForm);
 routes.post('/subject', insertSubjects);
 routes.get('/slip/:session/:id', GetSlip);
 routes.put('/updatestatus/:formid', UpdateStatus);

@@ -72,6 +72,7 @@ module.exports.getExamFormByDeptId = (req, res) => {
 
 module.exports.insertExamForm = (req, res) => {
 	try {
+		const url = req.protocol + '://' + req.get('host');
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
@@ -85,7 +86,8 @@ module.exports.insertExamForm = (req, res) => {
 						status: 0,
 						remarks: "",
 						date: new Date().getTime(),
-						ismarked:1
+						ismarked: 1,
+						image: url + '/uploads/' + req.file.filename
 					}
 				],
 				function(err, rows, fields) {
