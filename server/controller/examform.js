@@ -86,7 +86,6 @@ module.exports.insertExamForm = (req, res) => {
 						status: 0,
 						remarks: "",
 						date: new Date().getTime(),
-						ismarked: 1,
 						image: url + '/uploads/' + req.file.filename
 					}
 				],
