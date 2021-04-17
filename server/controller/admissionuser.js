@@ -82,7 +82,7 @@ module.exports.insertadmission = (req, res) => {
 			error: 'Error getting admission',
 			result: [],
 			success: 'Failed'
-		});
+		}); 
 	}
 };
 
