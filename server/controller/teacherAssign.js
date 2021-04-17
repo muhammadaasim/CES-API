@@ -169,7 +169,8 @@ module.exports.AssignSubject = (req, res) => {
 						t_id: req.body.tid,
 						session: new Date().getFullYear(),
 						incharge_id: req.body.hodid,
-						date: new Date().getTime()
+						date: new Date().getTime(),
+						// isdisabled:req.body.isdisabled
 					}
 				],
 				function (err, rows, fields) {
@@ -194,10 +195,11 @@ module.exports.AssignSubject = (req, res) => {
 };
 
 module.exports.deassign = (req, res) => {
+	console.log(req.body)	
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`DELETE FROM f_subject_teacher_assign WHERE id=?`,req.body.id , function(
+			connection.query(`DELETE FROM f_subject_teacher_assign WHERE id = ?`,[req.body.id] , function(
 				err,
 				rows,
 				fields
