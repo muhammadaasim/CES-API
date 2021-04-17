@@ -4,7 +4,7 @@ module.exports.getMarks = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			console.log('MySQL Connection Established: ', connection.threadId);
-			connection.query('SELECT * FROM getmarksled', function(err, rows, fields) {
+			connection.query('SELECT * FROM getmarksled', function (err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ error: '', success: 'success', result: rows });
@@ -24,7 +24,7 @@ module.exports.Getmarksheet = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('select * from getmarksheet where std_id=? and sem_id=? and status=4', [ req.params.std_id,req.params.sem_id ], function(err, rows, fields) {
+			connection.query('select * from getmarksheet where std_id=? and sem_id=? and status=4', [req.params.std_id, req.params.sem_id], function (err, rows, fields) {
 				if (err) {
 					console.log(err);
 				}
@@ -47,7 +47,7 @@ module.exports.getMarksByHodID = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('select * from getmarksled where hod_id= ?', [ req.params.id ], function(err, rows, fields) {
+			connection.query('select * from getmarksled where hod_id= ?', [req.params.id], function (err, rows, fields) {
 				if (err) {
 					console.log(err);
 				}
@@ -68,7 +68,7 @@ module.exports.GetMarksByDept = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query('SELECT * FROM getmark where dept_id=?', [ req.params.id ], function(err, rows, fields) {
+			connection.query('SELECT * FROM getmark where dept_id=?', [req.params.id], function (err, rows, fields) {
 				if (err) {
 					console.log(err);
 				}
@@ -103,11 +103,11 @@ module.exports.insertMarksLedger = (req, res) => {
 						date: new Date().getTime(),
 						sessionalmark: req.body.sessionalmark,
 						finalmark: req.body.finalmark,
-						totalmark: parseInt( req.body.midmark) + parseInt(req.body.sessionalmark) +parseInt(req.body.finalmark),
-						remarks:""
+						totalmark: parseInt(req.body.midmark) + parseInt(req.body.sessionalmark) + parseInt(req.body.finalmark),
+						remarks: ""
 					}
 				],
-				function(err, rows, fields) {
+				function (err, rows, fields) {
 					if (err) throw err;
 					console.log(rows);
 					res.send({
@@ -134,8 +134,8 @@ module.exports.UpdateStatus = (req, res) => {
 			if (err) throw err;
 			connection.query(
 				`UPDATE marks_ledger SET status = ? , remarks=? WHERE  id = ?`,
-				[ req.body.status,req.body.remarks, req.params.id ],
-				function(err, rows, fields) {
+				[req.body.status, req.body.remarks, req.params.id],
+				function (err, rows, fields) {
 					if (err) throw err;
 					console.log(rows);
 					res.send({
@@ -156,12 +156,11 @@ module.exports.UpdateStatus = (req, res) => {
 	}
 };
 
-module.exports.DeleteIsMarked = (req, res) => {
+module.exports.updateIsMarked = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`DELETE FROM f_form_subject WHERE id=?`, {id:req.body.id} , function(
-				err,
+			connection.query(`UPDATE f_form_subject SET ismarked = ? WHERE  id = ?`, [req.body.ismarked, req.body.id], function (err,
 				rows,
 				fields
 			) {
@@ -169,7 +168,7 @@ module.exports.DeleteIsMarked = (req, res) => {
 				console.log(rows);
 				res.send({
 					error: null,
-					message: 'Delete successfully',
+					message: 'Update successfully',
 					result: rows
 				});
 				connection.release((er) => console.log(er));

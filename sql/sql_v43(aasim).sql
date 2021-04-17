@@ -153,10 +153,7 @@ CREATE TABLE `f_form_subject` (
 /*Data for the table `f_form_subject` */
 
 insert  into `f_form_subject`(`f_id`,`sub_id`,`id`,`ismarked`) values 
-(1,1,1,0),
-(1,2,2,0),
 (1,3,3,0),
-(1,4,4,0),
 (1,5,5,0),
 (1,6,6,0),
 (2,6,7,0),
