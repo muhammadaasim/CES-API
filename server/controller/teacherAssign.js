@@ -197,7 +197,7 @@ module.exports.deassign = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`DELETE FROM f_form_subject WHERE id=?`,req.body.id , function(
+			connection.query(`DELETE FROM f_subject_teacher_assign WHERE id=?`,req.body.id , function(
 				err,
 				rows,
 				fields
