@@ -156,11 +156,11 @@ module.exports.UpdateStatus = (req, res) => {
 	}
 };
 
-module.exports.updateIsMarked = (req, res) => {
+module.exports.DeleteIsMarked = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`UPDATE examform SET ismarked = ? WHERE  id = ?`, [req.body.ismarked, req.body.id ], function(
+			connection.query(`DELETE FROM f_form_subject WHERE id=?`, {id:req.body.id} , function(
 				err,
 				rows,
 				fields
@@ -169,7 +169,7 @@ module.exports.updateIsMarked = (req, res) => {
 				console.log(rows);
 				res.send({
 					error: null,
-					message: 'Update successfully',
+					message: 'Delete successfully',
 					result: rows
 				});
 				connection.release((er) => console.log(er));
