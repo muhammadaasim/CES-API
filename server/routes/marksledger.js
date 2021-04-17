@@ -16,7 +16,7 @@ routes.get('/hod/:id', getMarksByHodID);
 routes.get('/dept/:id', GetMarksByDept);
 routes.get('/getmarksheet/:std_id/:sem_id', Getmarksheet);
 routes.put('/updatestatus/:id', UpdateStatus);
-routes.put('/ismarked', updateIsMarked);
+routes.put('/ismarked/:id', updateIsMarked);
 
 
 module.exports = routes;
