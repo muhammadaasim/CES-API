@@ -8,7 +8,7 @@ var {
 	updateIsMarked,
 	insertMarksLedger,
 	Getmarksheet,
-	UpdateMarks
+	UpdateMarks,
 } = require('../controller/marksledger');
 
 routes.get('/', getMarks);

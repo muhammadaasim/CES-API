@@ -27,7 +27,7 @@ module.exports.getControllerById = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM examcontroller WHERE id = ",
+        "SELECT * FROM examcontroller WHERE id = ?",
         [req.params.id],
         function (err, rows, fields) {
           if (err) throw err;
