@@ -43,6 +43,29 @@ module.exports.Getmarksheet = (req, res) => {
 		});
 	}
 };
+module.exports.getledger = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query(
+				'select * from getmarksledger',
+				function(err, rows, fields) {
+					if (err) {
+						console.log(err);
+					}
+					res.send({ result: rows });
+					connection.release((er) => console.log(er));
+				}
+			);
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
 
 module.exports.getMarksByHodID = (req, res) => {
 	try {
