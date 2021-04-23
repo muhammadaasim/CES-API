@@ -70,7 +70,13 @@ app.use('/marksledger', marksledger);
 var admissionuser = require('./routes/admissionuser');
 app.use('/admissionuser', admissionuser);
 
+var adminuser = require('./routes/adminuser');
+app.use('/adminuser', adminuser);
+
 var config = require('./routes/config');
 app.use('/config', config);
+
+var recheck = require('./routes/recheck');
+app.use('/recheck', recheck);
 
 app.listen(4000, () => console.log('Server running on PORT = 4000'));

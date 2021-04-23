@@ -9,11 +9,14 @@ var {
 	insertMarksLedger,
 	GetMarksheet,
 	UpdateMarks,
-	getledger
+	getledger,
+	getMarksByID
+
 } = require('../controller/marksledger');
 
 routes.get('/ledger', getledger);
 routes.get('/', getMarks);
+routes.get('/:id', getMarksByID);
 routes.post('/', insertMarksLedger);
 routes.get('/hod/:id', getMarksByHodID);
 routes.put('/updatemarks/:id', UpdateMarks);

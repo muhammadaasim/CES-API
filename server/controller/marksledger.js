@@ -19,6 +19,26 @@ module.exports.getMarks = (req, res) => {
 	}
 };
 
+module.exports.getMarksByID = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			console.log('MySQL Connection Established: ', connection.threadId);
+			connection.query('SELECT * FROM getmarksled where id =?',[req.params.id], function(err, rows, fields) {
+				if (err) throw err;
+				res.send({ error: '', success: 'success', result: rows });
+				connection.release((err) => console.log(err));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
 module.exports.Getmarksheet = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
@@ -43,6 +63,7 @@ module.exports.Getmarksheet = (req, res) => {
 		});
 	}
 };
+
 module.exports.getledger = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
