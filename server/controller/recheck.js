@@ -46,3 +46,29 @@ module.exports.insertRecheck = (req, res) => {
 		res.send({ error: 'Error getting Recheck', department: [], success: 'Failed' });
 	}
 };
+module.exports.UpdateStatus = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query(
+				`UPDATE recheck SET status = ? , remarks=? WHERE  id = ?`,
+				[ req.body.status, req.body.remarks, req.params.id ],
+				function(err, rows, fields) {
+					if (err) throw err;
+					res.send({
+						error: null,
+						message: 'Update successfully',
+						result: rows
+					});
+					connection.release((er) => console.log(er));
+				}
+			);
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting updating data',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
