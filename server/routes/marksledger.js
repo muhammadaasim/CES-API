@@ -10,10 +10,12 @@ var {
 	GetMarksheet,
 	UpdateMarks,
 	getledger,
-	getMarksByID
+	getMarksByID,
+	GetGazzated
 
 } = require('../controller/marksledger');
 
+routes.get('/gazzated', GetGazzated);
 routes.get('/ledger', getledger);
 routes.get('/', getMarks);
 routes.get('/:id', getMarksByID);
@@ -24,6 +26,9 @@ routes.get('/dept/:id', GetMarksByDept);
 routes.get('/getmarksheet/:std_id/:sem_id', GetMarksheet);
 routes.put('/updatestatus/:id', UpdateStatus);
 routes.put('/ismarked/:id', updateIsMarked);
+
+
+
 
 
 module.exports = routes;

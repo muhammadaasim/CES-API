@@ -1,4 +1,5 @@
 var { connection } = require('../db');
+// var _=require('lodash')
 module.exports.getMarks = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
@@ -18,6 +19,8 @@ module.exports.getMarks = (req, res) => {
 		});
 	}
 };
+
+
 
 module.exports.getMarksByID = (req, res) => {
 	try {
@@ -44,7 +47,7 @@ module.exports.Getmarksheet = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
-				'select * from getmarksheet where std_id=? and sem_id=? and status=4',
+				'select * from getmarksheet where std_id=? and sem_id=?',
 				[ req.params.std_id, req.params.sem_id ],
 				function(err, rows, fields) {
 					if (err) {
@@ -63,6 +66,35 @@ module.exports.Getmarksheet = (req, res) => {
 		});
 	}
 };
+
+module.exports.GetGazzated = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query(
+				"SELECT f_id,dept_id,dept,prog_id,program,sem_id,semester,STATUS,std_id,rollno,fullname,AVG(gp) 'gpa' FROM getmarksheet GROUP BY dept,program,semester,rollno ",
+				function(err, rows, fields) {
+					if (err) {
+						console.log(err);
+					}
+			//		const filterByDept=_.chain(rows).groupBy('rollno').map((item,key)=>({rollno:key,data:item})).value()
+					
+
+					res.send({ result: rows });
+					connection.release((er) => console.log(er));
+				}
+			);
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
+
 
 module.exports.getledger = (req, res) => {
 	try {
