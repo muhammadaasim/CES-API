@@ -72,7 +72,7 @@ module.exports.GetGazzated = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
-				"SELECT f_id,dept_id,dept,prog_id,program,sem_id,semester,STATUS,std_id,rollno,fullname,AVG(gp) 'gpa' FROM getmarksheet GROUP BY dept,program,semester,rollno ",
+				"SELECT * from GetGazzated ",
 				function(err, rows, fields) {
 					if (err) {
 						console.log(err);
