@@ -74,6 +74,27 @@ module.exports.getSubjectBySemId = (req, res) => {
 	}
 };
 
+module.exports.getImpSubject = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query('SELECT * FROM GetImproverSubject WHERE std_id=? AND sem_id=?', [ req.params.std_id,req.params.sem_id ], function(
+				err,
+				rows,
+				fields
+			) {
+				if (err) throw err;
+				console.log(rows);
+				res.send({ result: rows });
+				connection.release((er) => console.log(er));
+			});
+		});
+	} catch (e) {
+		res.send({ error: 'Error getting subject', subject: [], success: 'Failed' });
+	}
+};
+
+
 module.exports.insertSubject = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {

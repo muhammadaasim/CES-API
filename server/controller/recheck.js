@@ -58,8 +58,8 @@ module.exports.UpdateMarks = (req, res) => {
 			connection.query(
 				`UPDATE recheck SET n_sessional=?,n_mid=?,n_final=?,n_total=? WHERE id = ?`,
 				[ parseInt(req.body.sessional), parseInt(req.body.mid), parseInt(req.body.final), parseInt(	parseInt(req.body.mid) +
-					parseInt(req.body.sessionalmark) +
-					parseInt(req.body.finalmark)), parseInt(req.params.id) ],
+					parseInt(req.body.sessional) +
+					parseInt(req.body.final)), parseInt(req.params.id) ],
 				function(err, rows, fields) {
 					if (err) throw err;
 					res.send({
