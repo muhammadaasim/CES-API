@@ -4,7 +4,7 @@ module.exports.getConfig = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       console.log("MySQL Connection Established: ", connection.threadId);
-      connection.query("SELECT * FROM config", function (err, rows, fields) {
+      connection.query("SELECT id,IF(CURDATE() BETWEEN startdate AND enddate,'1','0') 'isenable',configname FROM config ", function (err, rows, fields) {
         if (err) throw err;
         console.log(rows);
         res.send({ error: "", success: "success", result: rows });
@@ -25,7 +25,7 @@ module.exports.updateConfig = (req, res) => {
     connection.getConnection((err, connection) => {
       if (err) throw err;
       connection.query(
-        `update config  SET isenabled = ?  WHERE id = ? `,[req.body.isenabled,req.params.id],
+        `update config  SET startdate = ?,enddate=? WHERE id = ? `,[req.body.startdate,req.body.enddate,req.params.id],
         function (err, rows, fields) {
           if (err) throw err;
           console.log(rows);
