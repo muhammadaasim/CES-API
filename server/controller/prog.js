@@ -53,7 +53,7 @@ module.exports.insertProgram = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
-			connection.query(`INSERT INTO program SET ?`, [{ name: req.body.name,dept_id: req.body.dept_id }], function(err, rows, fields) {
+			connection.query(`INSERT INTO program SET ?`, [{ name: req.body.name,dept_id: req.body.dept_id,fullname:req.body.fullname }], function(err, rows, fields) {
 				if (err) throw err;
 				console.log(rows);
 				res.send({ error: null, message: 'Insert successfully', result: rows });
