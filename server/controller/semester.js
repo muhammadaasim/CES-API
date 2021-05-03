@@ -84,3 +84,19 @@ module.exports.insertSemester = (req, res) => {
 		res.send({ error: 'Error getting semester', semester: [], success: 'Failed' });
 	}
 };
+
+module.exports.insertEightSemester = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query(`CALL Sp_inserteightsemesters(?) `,  req.body.prog_id , function(err, rows, fields) {
+				if (err) throw err;
+				console.log(rows);
+				res.send({ error: null, message: 'Insert successfully', result: rows });
+				connection.release((er) => console.log(er));
+			});
+		});
+	} catch (e) {
+		res.send({ error: 'Error getting semester', semester: [], success: 'Failed' });
+	}
+};
