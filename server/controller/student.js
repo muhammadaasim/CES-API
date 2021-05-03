@@ -67,6 +67,33 @@ module.exports.getStudentDeptId = (req, res) => {
 	}
 };
 
+module.exports.getStudentProgId = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query('SELECT * FROM GetStudent WHERE prog_id= ?', [ req.params.id ], function(
+				err,
+				rows,
+				fields
+			) {
+				if (err) {
+					console.log(err);
+				}
+				console.log(rows);
+				res.send({ result: rows });
+				connection.release((er) => console.log(er));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting student',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
+
 module.exports.insertStudent = (req, res) => {
 	try {
 		if (!req.file) {

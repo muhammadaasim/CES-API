@@ -9,6 +9,7 @@ var {
 	updateStudent,
 	loginStudent,
 	getStudentDeptId,
+	getStudentProgId,
 	status
 } = require('../controller/student');
 routes.get('/', getStudent);
@@ -19,6 +20,7 @@ routes.post('/login', loginStudent);
 
 routes.get('/:id', getStudentById);
 routes.get('/dept/:id', getStudentDeptId);
+routes.get('/prog/:id', getStudentProgId);
 routes.put('/update/:id', upload.single('image'), updateStudent);
 
 module.exports = routes;

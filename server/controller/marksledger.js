@@ -320,3 +320,30 @@ module.exports.UpdateMarks = (req, res) => {
 	}
 };
 
+
+module.exports.PromoteStd = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query(
+				`#UPDATE student SET semester_id=semester_id+1 WHERE id=?`,
+				req.body.std_id,
+				function(err, rows, fields) {
+					if (err) throw err;
+					res.send({
+						error: null,
+						message: 'Marks Update successfully',
+						result: rows
+					});
+					connection.release((er) => console.log(er));
+				}
+			);
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting updating data',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
