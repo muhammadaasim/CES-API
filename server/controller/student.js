@@ -82,6 +82,7 @@ module.exports.insertStudent = (req, res) => {
 							rollno: req.body.rollno,
 							fullname: req.body.fullname,
 							prog_id: parseInt(req.body.prog_id),
+							semester_id:parseInt(req.body.semester_id),
 							caste: req.body.caste,
 							dateofbirth: req.body.dateofbirth,
 							religion: req.body.religion,
