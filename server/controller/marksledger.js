@@ -62,30 +62,30 @@ module.exports.getMarksByID = (req, res) => {
 	}
 };
 
-module.exports.Getmarksheet = (req, res) => {
-	try {
-		connection.getConnection((err, connection) => {
-			if (err) throw err;
-			connection.query(
-				'select * from getmarksheet where std_id=? and sem_id=?',
-				[ req.params.std_id, req.params.sem_id ],
-				function(err, rows, fields) {
-					if (err) {
-						console.log(err);
-					}
-					res.send({ result: rows });
-					connection.release((er) => console.log(er));
-				}
-			);
-		});
-	} catch (e) {
-		res.send({
-			error: 'Error getting marks ledger',
-			result: [],
-			success: 'Failed'
-		});
-	}
-};
+// module.exports.Getmarksheet = (req, res) => {
+// 	try {
+// 		connection.getConnection((err, connection) => {
+// 			if (err) throw err;
+// 			connection.query(
+// 				'select * from getmarkshee where std_id=? and sem_id=?',
+// 				[ req.params.std_id, req.params.sem_id ],
+// 				function(err, rows, fields) {
+// 					if (err) {
+// 						console.log(err);
+// 					}
+// 					res.send({ result: rows });
+// 					connection.release((er) => console.log(er));
+// 				}
+// 			);
+// 		});
+// 	} catch (e) {
+// 		res.send({
+// 			error: 'Error getting marks ledger',
+// 			result: [],
+// 			success: 'Failed'
+// 		});
+// 	}
+// };
 
 
 
@@ -173,6 +173,30 @@ module.exports.GetMarksheet = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query('select * from semmarksheet where std_id=? and sem_id=?', [ req.params.std_id,req.params.sem_id ], function(
+				err,
+				rows,
+				fields
+			) {
+				if (err) {
+					console.log(err);
+				}
+				res.send({ result: rows });
+				connection.release((er) => console.log(er));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+module.exports.GetTranscript = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query('select * from semmarksheet where std_id=?', [ req.params.std_id], function(
 				err,
 				rows,
 				fields
