@@ -123,7 +123,7 @@ module.exports.GetGazzated1 = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
-				"SELECT * FROM getgazzated1 ",
+				"SELECT DISTINCT * FROM getgazzated1 WHERE remarks NOT IN ('termback') AND semester NOT IN ('Eighth') ",
 				function(err, rows, fields) {
 					if (err) {
 						console.log(err);
