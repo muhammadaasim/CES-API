@@ -20,6 +20,26 @@ module.exports.getMarks = (req, res) => {
 	}
 };
 
+module.exports.GPStd = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			console.log('MySQL Connection Established: ', connection.threadId);
+			connection.query('SELECT * FROM getpassedstudent', function(err, rows, fields) {
+				if (err) throw err;
+				res.send({ error: '', success: 'success', result: rows });
+				connection.release((err) => console.log(err));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
 
 
 module.exports.getMarksByID = (req, res) => {
@@ -66,6 +86,9 @@ module.exports.Getmarksheet = (req, res) => {
 		});
 	}
 };
+
+
+
 
 module.exports.GetGazzated = (req, res) => {
 	try {
@@ -191,6 +214,27 @@ module.exports.GetMarksByDept = (req, res) => {
 		});
 	}
 };
+module.exports.GetStdList = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query('SELECT * FROM getgazzated1', function(err, rows, fields) {
+				if (err) {
+					console.log(err);
+				}
+				res.send({ result: rows });
+				connection.release((er) => console.log(er));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting from marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
 
 module.exports.insertMarksLedger = (req, res) => {
 	try {
@@ -326,7 +370,7 @@ module.exports.PromoteStd = (req, res) => {
 		connection.getConnection((err, connection) => {
 			if (err) throw err;
 			connection.query(
-				`#UPDATE student SET semester_id=semester_id+1 WHERE id=?`,
+				`UPDATE student SET semester_id=semester_id+1 WHERE id=?`,
 				req.body.std_id,
 				function(err, rows, fields) {
 					if (err) throw err;
