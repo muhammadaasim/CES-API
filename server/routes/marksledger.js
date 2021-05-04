@@ -12,7 +12,7 @@ var {
 	getledger,
 	getMarksByID,
 	PromoteStd,
-	GetStdList,
+	GetStdList,GetGazzated1,
 	GetGazzated, GPStd,GetTranscript
 
 } = require('../controller/marksledger');
@@ -21,6 +21,7 @@ var {
 
 routes.get('/getpassedstd', GPStd);
 routes.get('/gazzated', GetGazzated);
+routes.get('/gazzated1', GetGazzated1);
 routes.get('/ledger', getledger);
 routes.get('/', getMarks);
 routes.get('/:id', getMarksByID);

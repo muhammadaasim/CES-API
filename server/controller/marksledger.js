@@ -118,6 +118,33 @@ module.exports.GetGazzated = (req, res) => {
 };
 
 
+module.exports.GetGazzated1 = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query(
+				"SELECT * FROM getgazzated1 ",
+				function(err, rows, fields) {
+					if (err) {
+						console.log(err);
+					}
+			//		const filterByDept=_.chain(rows).groupBy('rollno').map((item,key)=>({rollno:key,data:item})).value()
+					
+
+					res.send({ result: rows });
+					connection.release((er) => console.log(er));
+				}
+			);
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
 
 module.exports.getledger = (req, res) => {
 	try {
