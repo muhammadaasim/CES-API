@@ -13,12 +13,13 @@ var {
 	getMarksByID,
 	PromoteStd,
 	GetStdList,GetGazzated1,
-	GetGazzated, GPStd,GetTranscript
+	GetGazzated, GPStd,GetTranscript,GetTermback
 
 } = require('../controller/marksledger');
 
 
 
+routes.get('/termback', GetTermback);
 routes.get('/getpassedstd', GPStd);
 routes.get('/gazzated', GetGazzated);
 routes.get('/gazzated1', GetGazzated1);
