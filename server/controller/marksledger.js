@@ -220,6 +220,31 @@ module.exports.getMarksByHodID = (req, res) => {
 	}
 };
 
+module.exports.GetAnnualMarksheet = (req, res) => {
+	try {
+		connection.getConnection((err, connection) => {
+			if (err) throw err;
+			connection.query("SELECT * FROM semmarksheet WHERE SEMESTER IN ('Second','Fourth','Sixth','Eighth') AND STD_ID=1", [ req.params.std_id ], function(
+				err,
+				rows,
+				fields
+			) {
+				if (err) {
+					console.log(err);
+				}
+				res.send({ result: rows });
+				connection.release((er) => console.log(er));
+			});
+		});
+	} catch (e) {
+		res.send({
+			error: 'Error getting marks ledger',
+			result: [],
+			success: 'Failed'
+		});
+	}
+};
+
 module.exports.GetMarksheet = (req, res) => {
 	try {
 		connection.getConnection((err, connection) => {

@@ -13,7 +13,7 @@ var {
 	getMarksByID,
 	PromoteStd,
 	GetStdList,GetGazzated1,
-	GetGazzated, GPStd,GetTranscript,GetTermback
+	GetGazzated, GPStd,GetTranscript,GetTermback,GetAnnualMarksheet
 
 } = require('../controller/marksledger');
 
@@ -32,6 +32,7 @@ routes.put('/promotestd', PromoteStd);
 routes.put('/updatemarks/:id', UpdateMarks);
 routes.get('/dept/:id', GetMarksByDept);
 routes.get('/getmarksheet/:std_id/:sem_id', GetMarksheet);
+routes.get('/annualmarksheet/:std_id', GetAnnualMarksheet);
 routes.get('/getts/:std_id', GetTranscript);
 routes.put('/updatestatus/:id', UpdateStatus);
 routes.put('/ismarked/:id', updateIsMarked);
